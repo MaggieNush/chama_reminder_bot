@@ -6,8 +6,17 @@ export class WhatsAppService {
   private apiUrl: string;
   
   constructor() {
-    this.accessToken = import.meta.env.VITE_WHATSAPP_ACCESS_TOKEN || '';
-    this.phoneNumberId = import.meta.env.VITE_WHATSAPP_PHONE_NUMBER_ID || '';
+    // Check if we're in Node.js environment or browser environment
+    const isNodeEnv = typeof process !== 'undefined' && process.env;
+    
+    this.accessToken = isNodeEnv 
+      ? process.env.VITE_WHATSAPP_ACCESS_TOKEN || ''
+      : import.meta.env.VITE_WHATSAPP_ACCESS_TOKEN || '';
+    
+    this.phoneNumberId = isNodeEnv
+      ? process.env.VITE_WHATSAPP_PHONE_NUMBER_ID || ''
+      : import.meta.env.VITE_WHATSAPP_PHONE_NUMBER_ID || '';
+    
     this.apiUrl = `https://graph.facebook.com/v18.0/${this.phoneNumberId}/messages`;
   }
   
@@ -119,7 +128,12 @@ export class WhatsAppService {
   
   // Verify webhook
   static verifyWebhook(mode: string, token: string, challenge: string): string | null {
-    const verifyToken = import.meta.env.VITE_WEBHOOK_VERIFY_TOKEN || 'chama_bot';
+    // Check if we're in Node.js environment or browser environment
+    const isNodeEnv = typeof process !== 'undefined' && process.env;
+    
+    const verifyToken = isNodeEnv
+      ? process.env.VITE_WEBHOOK_VERIFY_TOKEN || 'chama_bot'
+      : import.meta.env.VITE_WEBHOOK_VERIFY_TOKEN || 'chama_bot';
     
     if (mode === 'subscribe' && token === verifyToken) {
       return challenge;
