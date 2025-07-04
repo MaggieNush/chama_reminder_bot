@@ -13,7 +13,7 @@ Option	Description
 ❓ Help	View available commands and guidance
 
 🌍 Live Deployment
-✅ Frontend: https://your-bot-ui.netlify.app
+✅ Frontend: (https://chamachatbot.netlify.app/)
 ✅ Backend Webhook (optional): Hosted externally if needed for M-PESA, MongoDB, etc.
 
 You can embed the Bolt.new app inside the Netlify site or deploy it as a separate flow endpoint.
