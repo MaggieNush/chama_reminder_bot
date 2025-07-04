@@ -13,8 +13,8 @@ export class WhatsAppService {
   
   async sendMessage(to: string, message: string): Promise<void> {
     try {
-      // Clean phone number (remove + and spaces)
-      const cleanPhone = to.replace(/[\s+]/g, '');
+      // Clean phone number (remove spaces only, keep + prefix for E.164 format)
+      const cleanPhone = to.replace(/\s/g, '');
       
       const payload = {
         messaging_product: 'whatsapp',
@@ -41,7 +41,7 @@ export class WhatsAppService {
   
   async sendTemplateMessage(to: string, templateName: string, parameters: string[]): Promise<void> {
     try {
-      const cleanPhone = to.replace(/[\s+]/g, '');
+      const cleanPhone = to.replace(/\s/g, '');
       
       const payload = {
         messaging_product: 'whatsapp',
@@ -80,7 +80,7 @@ export class WhatsAppService {
   
   async sendButtonMessage(to: string, bodyText: string, buttons: Array<{id: string, title: string}>): Promise<void> {
     try {
-      const cleanPhone = to.replace(/[\s+]/g, '');
+      const cleanPhone = to.replace(/\s/g, '');
       
       const payload = {
         messaging_product: 'whatsapp',
